@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-
-from lxml import etree
-from copy import deepcopy
+# Author: Trung Le Hoang <le.hg.trung@gmail.com>, created on Wed, Mar 15
 
 
 def get_all_leaf_nodes(node, leaf_nodes):

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Author: Trung Le Hoang <le.hg.trung@gmail.com>, created on Wed, Mar 15
 
 import requests
 import logging

@@ -1,9 +1,8 @@
 from EzCrawl import EzCrawl
+from pprint import pprint
 
-ez = EzCrawl('https://www.ted.com/talks?language=vi')
+ez = EzCrawl('https://tiki.vn/tivi/c5015/lg?src=mega-menu')
 
 if __name__ == '__main__':
-    crs = ez.find_candidate_records()
-    for key in list(crs.keys()):
-        print(len(crs[key]))
-
+    dg = ez.identify_records()
+    pprint(dg)
