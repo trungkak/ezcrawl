@@ -20,7 +20,6 @@ class EzCrawl(object):
         self._tree = etree.ElementTree(self._root)
 
         self._leaf_nodes = []
-        # get_all_leaf_nodes(self._root, self._leaf_nodes)
 
     def get_root(self):
         return self._root
@@ -36,12 +35,6 @@ class EzCrawl(object):
     def _page_source(self):
         return get_pure_html(self._url)
 
-    def _construct_items(self):
-        paths = [self._simple_path(node) for node in self._leaf_nodes]
-        items = [node for node in self._leaf_nodes
-                 if paths.count(self._simple_path(node)) >= 5]
-        return items
-
     def _simple_path(self, node):
         return re.sub(r'\[[^\]]*\]', '', self._tree.getpath(node))
 
@@ -51,7 +44,6 @@ class EzCrawl(object):
         path_node_map = defaultdict(list)
 
         for l_node in self._leaf_nodes:
-            # tp = self._tree.getpath(l_node)
             tp = self._simple_path(l_node)
             tree_paths.append(tp)
             path_node_map[tp].append(l_node)
