@@ -1,5 +1,5 @@
 from ezcrawl.network import get_html, _ping
 
-some_url = 'http://amazon.com'
+some_url = 'http://shopee.com'
 
-print(_ping(some_url))
+print(get_html(some_url))
