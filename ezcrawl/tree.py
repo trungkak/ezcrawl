@@ -14,3 +14,5 @@ def get_all_leaf_nodes(node, leaf_nodes):
 def get_all_ancestors(node):
     """ Return all ancestor nodes from a node """
     return node.iterancestors()
+
+

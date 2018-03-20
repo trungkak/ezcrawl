@@ -30,7 +30,7 @@ class EzCrawl(object):
         return os.path.dirname(self._url)
 
     def _construct_tree(self):
-        """ Construct lxml tree from html source """
+        """ Construct xml tree from html source """
         page_src = self._page_source()
         root = lxml.html.fromstring(page_src)
         return root
@@ -109,6 +109,7 @@ class EzCrawl(object):
         counter[(tp, node)] += 1
         if node.getparent() != self._root:
             self._bu_count(tp, node.getparent(), counter)
+
 
 
 

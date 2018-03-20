@@ -34,7 +34,7 @@ def _get_html_2xx_only(url):
     """
     If the response code is not 2XX raise an requests exception
     """
-    status_code = _ping(url)
+    status_code = ping(url)
     if status_code != -1:
         if status_code in range(200, 400):
             try:
@@ -50,7 +50,7 @@ def _get_html_2xx_only(url):
         raise requests.ConnectionError
 
 
-def _ping(url):
+def ping(url):
     """ Return status code of a website by making a HEAD request """
     try:
         r = requests.head(url=url)
