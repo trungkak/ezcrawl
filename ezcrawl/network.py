@@ -6,6 +6,8 @@ import logging
 from lxml.html.clean import Cleaner
 import random
 import time
+from fake_useragent import UserAgent
+
 
 __name__ = 'EzCrawl'
 
@@ -27,22 +29,21 @@ def get_pure_html(url):
 def get_html(url):
     """ Return source html from the url """
     try:
-        return _get_html_2xx_only(url)
+        # return _get_html_2xx_only(url)
+        return _by_pass_get_html(url)
     except Exception as e:
         raise e
 
 
 def _by_pass_get_html(url):
     """ In case you are blocked """
-    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'}
 
-    proxies_list = ["128.199.109.241:8080", "113.53.230.195:3128", "125.141.200.53:80", "125.141.200.14:80",
-                    "128.199.200.112:138", "149.56.123.99:3128", "128.199.200.112:80", "125.141.200.39:80",
-                    "134.213.29.202:4444"]
+    ua = UserAgent()
+    header = {'User-Agent':str(ua.chrome)}
+    print(header)
 
-    proxies = {'https': random.choice(proxies_list)}
     time.sleep(0.5 * random.random())
-    r = requests.get(url, headers, proxies=proxies)
+    r = requests.get(url, headers=header)
     page_html = r.content
     return page_html
 

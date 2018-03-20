@@ -4,7 +4,7 @@ from network import ping
 import csv
 
 
-base_url = 'http://www.funtrivia.com/en/Sports/FIFA-World-Cup-627.html'
+base_url = 'http://www.funtrivia.com/playquiz/quiz119248da8e88.html'
 
 
 if __name__ == '__main__':
