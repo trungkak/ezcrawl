@@ -6,6 +6,7 @@ from lxml import etree
 import os
 import re
 from collections import defaultdict, Counter
+from common import is_static
 
 from network import get_pure_html
 from tree import get_all_leaf_nodes, get_all_ancestors
@@ -42,13 +43,17 @@ class EzCrawl(object):
         """ Ex: html/div[1]/div[3]/a -> html/div/div/a """
         return re.sub(r'\[[^\]]*\]', '', self._tree.getpath(node))
 
-    def _find_data_items(self, threshold=3):
+    def _find_data_items(self, threshold=2):
         """ Find data items (leaf nodes) with repetition over threshold"""
         get_all_leaf_nodes(self._root, self._leaf_nodes)
         ips = []
         p2i = defaultdict(list)
 
         for l_node in self._leaf_nodes:
+            print(l_node.text_content())
+            print(self._simple_path(l_node))
+            if len(l_node.text_content().strip().split()) < threshold:
+                continue
             tp = self._simple_path(l_node)
             ips.append(tp)
             p2i[tp].append(l_node)
@@ -83,9 +88,10 @@ class EzCrawl(object):
             grp[self._simple_path(node)].append(node)
         return grp
 
-    def identify_records(self, threshold=3):
+    def identify_records(self, threshold=2):
         """ Select records that tend to be the main records """
         ips, p2i = self._find_data_items()
+
         ip2r = self._find_candidate_records(ips, p2i)
 
         cr = set()

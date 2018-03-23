@@ -52,35 +52,42 @@ cate_queue = {
 
 if __name__ == '__main__':
 
-    csv_file = open('output.csv', 'w')
-    writer = csv.writer(csv_file, delimiter=',')
+    url = 'https://tiki.vn/sach-tieng-anh/c320?order=top_seller&page=2'
+    ez = EzCrawl(url)
+    print(ping(url))
+    records = ez.identify_records()
+    print(len(records))
 
-    for cate in list(cate_queue.keys()):
-
-        for url in cate_queue[cate]:
-            i = 1
-            visited_urls = set()
-            full_url = url + '&page=' + str(i)
-            while ping(full_url) == 200:
-
-                print(url + '&page=' + str(i))
-
-                ez = EzCrawl(full_url)
-
-                records = ez.identify_records()
-
-                print(len(records))
-
-                if len(records) != 23:
-                    break
-
-                for record in records:
-                    name = get_record_name(record)
-
-                    writer.writerow([name, cate])
-                i += 1
-
-    csv_file.close()
+    # csv_file = open('output.csv', 'w')
+    # writer = csv.writer(csv_file, delimiter='\t')
+    #
+    # for cate in list(cate_queue.keys()):
+    #
+    #     for url in cate_queue[cate]:
+    #         i = 1
+    #         visited_urls = set()
+    #         full_url = url + '&page=' + str(i)
+    #         while ping(full_url) == 200:
+    #
+    #             print(full_url)
+    #
+    #             ez = EzCrawl(full_url)
+    #
+    #             records = ez.identify_records()
+    #
+    #             print(len(records))
+    #
+    #             if len(records) != 23:
+    #                 break
+    #
+    #             for record in records:
+    #                 name = get_record_name(record)
+    #
+    #                 writer.writerow([name, cate])
+    #             i += 1
+    #             full_url = url + '&page=' + str(i)
+    #
+    # csv_file.close()
 
 
 
