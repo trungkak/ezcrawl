@@ -39,12 +39,12 @@ def _by_pass_get_html(url):
     """ In case you are blocked """
 
     ua = UserAgent()
-    header = {'User-Agent':str(ua.chrome)}
+    header = {'User-Agent': str(ua.chrome)}
     print(header)
 
     time.sleep(0.5 * random.random())
     r = requests.get(url, headers=header)
-    page_html = r.content
+    page_html = r.text
     return page_html
 
 

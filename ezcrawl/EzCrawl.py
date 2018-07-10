@@ -6,7 +6,6 @@ from lxml import etree
 import os
 import re
 from collections import defaultdict, Counter
-from common import is_static
 
 from network import get_pure_html
 from tree import get_all_leaf_nodes, get_all_ancestors
@@ -14,7 +13,7 @@ from tree import get_all_leaf_nodes, get_all_ancestors
 
 class EzCrawl(object):
 
-    def __init__(self, url):
+    def __init__(self, url, is_js=False):
         self._url = url
         self._prefix = self._find_prefix()
 
@@ -22,6 +21,7 @@ class EzCrawl(object):
         self._tree = etree.ElementTree(self._root)
 
         self._leaf_nodes = []
+        self._is_js = is_js
 
     def get_root(self):
         return self._root
